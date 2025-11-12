@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phone Donation | Home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f3f3f3;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background-color: #2e8b57;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Container */
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background-color: white;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2e8b57;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="file"] {
+      padding: 3px;
+    }
+
+    button {
+      background-color: #2e8b57;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #256b45;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #2e8b57;
+      color: white;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="products.html">📦 Products</a>
+  </nav>
+
+  <div class="container">
+    <h1>Donate Your Old Phone</h1>
+    <form id="donationForm">
+      <label>Product Name:</label>
+      <input type="text" id="productName" required>
+
+      <label>Description:</label>
+      <textarea id="productDescription" rows="3" required></textarea>
+
+      <label>Address:</label>
+      <textarea id="address" rows="2" required></textarea>
+
+      <label>Contact Number:</label>
+      <input type="text" id="contact" required>
+
+      <label>Upload Product Image:</label>
+      <input type="file" id="productImage" accept="image/*" required>
+
+      <button type="button" id="addBtn">Add Product</button>
+    </form>
+  </div>
+
+  <footer>© 2025 Phone Donation Web App</footer>
+
+  <script>
+    const productName = document.getElementById("productName");
+    const productDescription = document.getElementById("productDescription");
+    const address = document.getElementById("address");
+    const contact = document.getElementById("contact");
+    const productImage = document.getElementById("productImage");
+    const addBtn = document.getElementById("addBtn");
+
+    addBtn.onclick = function() {
+      const nameValue = productName.value.trim();
+      const descValue = productDescription.value.trim();
+      const addressValue = address.value.trim();
+      const contactValue = contact.value.trim();
+      const imageFile = productImage.files[0];
+
+      if (!nameValue || !descValue || !addressValue || !contactValue || !imageFile) {
+        alert("Please fill all fields and upload an image!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function() {
+        const imageURL = reader.result;
+
+        // Store product data in localStorage
+        const productData = {
+          name: nameValue,
+          desc: descValue,
+          address: addressValue,
+          contact: contactValue,
+          image: imageURL,
+          collected: false
+        };
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+        products.push(productData);
+        localStorage.setItem("products", JSON.stringify(products));
+
+        alert("Product added successfully! Go to Products page to view it.");
+        
+        productName.value = "";
+        productDescription.value = "";
+        address.value = "";
+        contact.value = "";
+        productImage.value = "";
+      };
+      reader.readAsDataURL(imageFile);
+    };
+  </script>
+</body>
+</html>
