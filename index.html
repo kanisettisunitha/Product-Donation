@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phone Donation | Home</title>
+  <title>Product Donation </title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,7 +11,6 @@
       background-color: #f3f3f3;
     }
 
-    /* Navigation Bar */
     nav {
       background-color: #2e8b57;
       padding: 15px;
@@ -29,7 +28,6 @@
       text-decoration: underline;
     }
 
-    /* Container */
     .container {
       width: 90%;
       max-width: 600px;
@@ -77,20 +75,12 @@
       background-color: #256b45;
     }
 
-    footer {
-      text-align: center;
-      padding: 10px;
-      background-color: #2e8b57;
-      color: white;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
   <nav>
-    <a href="index.html">🏠 Home</a>
-    <a href="products.html">📦 Products</a>
+    <a href="index.html"> Home</a>
+    <a href="products.html"> Products</a>
   </nav>
 
   <div class="container">
@@ -115,8 +105,6 @@
     </form>
   </div>
 
-  <footer>© 2025 Phone Donation Web App</footer>
-
   <script>
     const productName = document.getElementById("productName");
     const productDescription = document.getElementById("productDescription");
@@ -140,8 +128,6 @@
       const reader = new FileReader();
       reader.onload = function() {
         const imageURL = reader.result;
-
-        // Store product data in localStorage
         const productData = {
           name: nameValue,
           desc: descValue,
